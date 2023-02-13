@@ -1,0 +1,79 @@
+const fs =require('fs');
+
+
+fs.readFile('demo1.txt', 'utf-8', (err, data)=>{
+    if(err){
+        console.log(err)
+    }else{
+        console.log(data)
+    }
+})
+
+
+const fs =require('fs');
+
+
+
+
+const fs =require('fs');
+
+
+fs.unlink('demo3.txt', (err)=>{
+    if(err){
+        console.log(err)
+    }else{
+        console.log("this is a successFul")
+    }
+})
+
+
+
+fs.rename('demo1.txt', 'demo3.txt', (err)=>{
+    if(err){
+        console.log(err)
+    }else{
+        console.log("this is a successFul")
+    }
+})
+
+
+
+const http=require('http');
+const fs=require('fs');
+const PORT=3000;
+const hostName='127.0.0.1'
+
+
+const servar =http.createServer((req,res)=>{
+    if(req.url === '/'){
+        fs.readFile("index.html", (err, data)=>{
+            res.writeHead(200,{"Content-Type":"Text/html"});
+            res.write(data);
+            res.end();
+        });
+    }
+    else if(req.url === '/about'){
+        fs.readFile("about.html", (err, data)=>{
+            res.writeHead(200,{"Content-Type":"Text/html"});
+            res.write(data);
+            res.end();
+        });
+    }
+    else if(req.url === '/contact'){
+        fs.readFile("contact.html", (err, data)=>{
+            res.writeHead(200,{"Content-Type":"Text/html"});
+            res.write(data);
+            res.end();
+        });
+    }
+    else{
+        fs.readFile("error.html", (err, data)=>{
+            res.writeHead(404,{"Content-Type":"Text/html"});
+            res.write(data);
+            res.end();
+        });
+    }
+})
+servar.listen(PORT, hostName, ()=>{
+    console.log(`servar is runing at http://${hostName}:${PORT}`)
+})
